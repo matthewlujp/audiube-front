@@ -27,6 +27,7 @@ class App extends Component {
       audioDescription: "",
       expandRelatedVideos: false,
       searchVideos: [],
+      focusTab: 0,
     });
   }
 
@@ -35,10 +36,19 @@ class App extends Component {
       expandRelatedVideos: !this.state.expandRelatedVideos
     });
   }
-
+  
   autoPlayToggleHandler = (toggleState) => {
     // toggleState: bool
     console.log("toggle autoplay!", toggleState)
+  }
+
+  replayToggleHandler = (toggleState) => {
+    // toggleState: bool
+    console.log("toggle autoplay!", toggleState)
+  }
+
+  tabChangedHandler = (value) => {
+    this.setState({focusTab: value})
   }
 
   searcHandler = (keywords) => {
@@ -63,7 +73,8 @@ class App extends Component {
           audio: process.env.REACT_APP_BACKEND + "/" + res.data.segment_list_file_url,
           poster: video.thumbnail.maxres.url,
           audioTitle: video.title,
-          audioDescription: "Published at " + video.publish_date + "   viewed " + video.view_count + " times"
+          audioDescription: "Published at " + video.publish_date + "   viewed " + video.view_count + " times",
+          focusTab: 0, // focus on player tab
         })
       });
   }
@@ -72,8 +83,8 @@ class App extends Component {
     return (
       <div className="App">
         <MuiThemeProvider>
-          <Tabs> 
-            <Tab label="Play" >
+          <Tabs value={this.state.focusTab} onChange={this.tabChangedHandler}> 
+            <Tab label="Play" value={0}>
               <div className="plaer-page" style={{width:400}}>
                 <Player
                   audio={this.state.audio}
@@ -82,31 +93,16 @@ class App extends Component {
                   audioDescription={this.state.audioDescription}
                   autoPlayToggleHandler={this.autoPlayToggleHandler}/>
                 <div style={{height:2}} />
-                {/* {
-                  this.state.expandRelatedVideos ? 
-                    <Paper style={{ height: 400, width: "100%", paddingLeft: 10, paddingRight: 10  }}>
-                      <div style={{ display: 'flex', marginLeft: 10}}>
-                        <p style={{ marginTop: 10 }}>Related</p><IconButton onClick={this.relatedVideosToggleHandler} style={{ paddingTop: 0,  }}>{LessIcon()}</IconButton>
-                      </div>
-                      <Divider />
-                      <Videos />
-                    </Paper> :
-                    <Paper style={{ height: 40, width: "100%", paddingLeft: 10, paddingRight: 10 }}>
-                      <div style={{ display: 'flex', marginLeft: 10 }}>
-                        <p style={{ marginTop: 10 }}>Related</p><IconButton onClick={this.toggleRelatedVideos} style={{ paddingTop: 3, paddingBottom: 12 }}>{MoreIcon()}</IconButton>
-                      </div>
-                    </Paper>
-                } */}
-                <Paper style={{ height: 400, width: "100%", paddingLeft: 10, paddingRight: 10  }}>
-                  <div style={{ display: 'flex', marginLeft: 10}}>
+                <div className="related-video-area" style={{ height: 400 }}>
+                  <div className="related-video-area-head" style={{ display: 'flex', marginLeft: 10}}>
                     <p style={{ marginTop: 10 }}>Related</p><IconButton onClick={this.relatedVideosToggleHandler} style={{ paddingTop: 0,  }}>{LessIcon()}</IconButton>
                   </div>
                   <Divider />
-                  <Videos videoList={this.state.searchVideos} videoClickHandler={this.props.videoChooseHandler}/>
-                </Paper>
+                  <Videos videoList={this.state.searchVideos} videoClickHandler={this.videoChooseHandler}/>
+                </div>
               </div>
             </Tab>
-            <Tab label="Search" >
+            <Tab label="Search" value={1}>
               <SearchArea searchHandler={this.searcHandler} videoChooseHandler={this.videoChooseHandler} searchResultVideos={this.state.searchVideos}/>
             </Tab>
           </Tabs>

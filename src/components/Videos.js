@@ -17,7 +17,7 @@ class Videos extends Component {
         );
 
         return (
-            <List style={{ maxHeight: '100%', overflow: 'auto', paddingTop: 0}}>
+            <List style={{ height: '100%', maxHeight: '95%', overflow: 'scroll', paddingTop: 0}}>
                 {videoCards}
             </List>
         );
