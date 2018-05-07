@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { List, ListItem } from 'material-ui/List';
-import Paper from 'material-ui/Paper';
-import videoCard from './VideoCard'
+import { List } from 'material-ui/List';
 import VideoCard from './VideoCard';
 
 class Videos extends Component {

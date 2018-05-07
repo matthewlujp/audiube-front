@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { List, ListItem } from 'material-ui/List';
-import Paper from 'material-ui/Paper';
+import { ListItem } from 'material-ui/List';
 import Divider from 'material-ui/Divider/Divider';
 import Avatar from 'material-ui/Avatar';
 
