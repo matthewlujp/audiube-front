@@ -44,7 +44,7 @@ class App extends Component {
   searcHandler = (keywords) => {
     // replace spaces with ','
     keywords = keywords.replace(/\s+/, ",")
-    axios.get(`http://audiube.xyz/videos/?q=${keywords}`)
+    axios.get(`${process.env.REACT_APP_BACKEND}/videos/?q=${keywords}`)
       .then(res => {
         // set unique keys
         console.log(res.data.videos)
@@ -56,11 +56,11 @@ class App extends Component {
 
   videoChooseHandler = (video) => {
     console.log("get", video.id)
-    axios.get(`http://audiube.xyz/streams/${video.id}`)
+    axios.get(`${process.env.REACT_APP_BACKEND}/streams/${video.id}`)
     .then(res => {
       console.log(res)
         this.setState({
-          audio: "http://audiube.xyz/"+res.data.segment_list_file_url,
+          audio: process.env.REACT_APP_BACKEND + "/" + res.data.segment_list_file_url,
           poster: video.thumbnail.maxres.url,
           audioTitle: video.title,
           audioDescription: "Published at " + video.publish_date + "   viewed " + video.view_count + " times"
