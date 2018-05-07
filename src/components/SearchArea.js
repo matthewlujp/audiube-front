@@ -31,7 +31,7 @@ class SearchArea extends Component {
 
     render() {
         return (
-            <Paper style={{height: 650, width:400}}>
+            <Paper style={{height: 600, width:400}}>
                 <Paper className="search-box" style={{ display: 'flex', flexDirection: 'row', paddingLeft: 10, paddingRight: 10 }}> 
                     <TextField
                         id="text-field-controlled"
@@ -40,7 +40,9 @@ class SearchArea extends Component {
                         style={{width: "80%", marginTop: 10, marginBottom: -1}}/>
                     <RaisedButton label="Search" onClick={this.searchHandler} style={{width:"20%", margin: 12, marginRight: 0}} />
                 </Paper>
-                <Videos videoList={this.props.searchResultVideos} videoClickHandler={this.props.videoChooseHandler}/>
+                <div style={{height: 580}}>
+                    <Videos videoList={this.props.searchResultVideos} videoClickHandler={this.props.videoChooseHandler}/>
+                </div>
             </Paper>
         );
     }

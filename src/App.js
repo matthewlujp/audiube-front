@@ -92,7 +92,7 @@ class App extends Component {
         <MuiThemeProvider>
           <Tabs value={this.state.focusTab} onChange={this.tabChangedHandler} > 
             <Tab label="Play" value={0}>
-              <div className="player-page" style={{height:1000, marginLeft:'auto', marginRight:'auto'}}>
+              <div className="player-page" style={{height:600, marginLeft:'auto', marginRight:'auto'}}>
                 <Player
                   audio={this.state.audio}
                   poster={this.state.poster}
@@ -102,7 +102,7 @@ class App extends Component {
                   relatedVideoList={this.state.relatedVideos}
                   />
                 <div style={{height:2}} />
-                <div className="related-video-area" style={{ height: 600, width: '100%' }}>
+                <div className="related-video-area" style={{ height: 500, width: '100%' }}>
                   <p style={{ marginTop: 12, marginLeft: 15 }}>Related Audios</p>
                   <Divider />
                   <Videos videoList={this.state.relatedVideos} videoClickHandler={this.videoChooseHandler}/>
