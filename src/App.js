@@ -25,6 +25,7 @@ class App extends Component {
       focusTab: 0,
       autoPlayFlag: false,
       replayFlag: false,
+      watchedVideos: [],
     });
   }
 
@@ -82,6 +83,7 @@ class App extends Component {
         audioTitle: video.title,
         audioDescription: "Published at " + video.publish_date + "   viewed " + video.view_count + " times",
         focusTab: 0, // focus on player tab
+        watchedVideos: this.state.watchedVideos.concat([video]),
       });
     });
   }
@@ -100,6 +102,7 @@ class App extends Component {
                   audioDescription={this.state.audioDescription}
                   chooseHandler={this.videoChooseHandler}
                   relatedVideoList={this.state.relatedVideos}
+                  watchedVideosList={this.state.watchedVideos}
                   />
                 <div style={{height:2}} />
                 <div className="related-video-area" style={{ height: 500, width: '100%' }}>

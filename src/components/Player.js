@@ -13,6 +13,7 @@ class Player extends Component {
         audioDescription: PropTypes.string.isRequired,
         chooseHandler: PropTypes.func.isRequired,
         relatedVideoList: PropTypes.array.isRequired,
+        watchedVideosList: PropTypes.array.isRequired,
     }
 
     constructor(props) {
@@ -43,12 +44,26 @@ class Player extends Component {
     audioEndedHandle = () => {
         if (!this.autoPlayFlag && !this.replayFlag ) return;
         setTimeout(() => {
-            // auto play < replay
             const videoDOM = document.getElementsByTagName("video")[0];
+            // auto play < replay
             if (this.replayFlag) {
                 if (videoDOM) videoDOM.play();
             } else {
-                this.props.chooseHandler(this.props.relatedVideoList[0]);
+                // search for an unwatched video in this.props.relatedVideoList
+                for (var i = 0; i < this.props.relatedVideoList.length; i++) {
+                    var found = false;
+                    for (var j = 0; j < this.props.watchedVideosList.length; j++) {
+                        if (this.props.relatedVideoList[i].id == this.props.watchedVideosList[j].id) {
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (found) continue;
+
+                    this.props.chooseHandler(this.props.relatedVideoList[i]); // not included in watchedVideosList -> play this
+                    return
+                }
+                this.props.chooseHandler(this.props.relatedVideoList[0]); // all videos in relatedVideosList have already been watched
             }
         }, 3000);
     }
@@ -59,7 +74,7 @@ class Player extends Component {
         const videoDOM = document.getElementsByTagName("video")[0];
         setTimeout(()=>{
             videoDOM.play();
-        }, 2000);
+        }, 1000);
     }
 
     render() {
