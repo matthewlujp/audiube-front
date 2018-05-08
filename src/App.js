@@ -90,7 +90,7 @@ class App extends Component {
     return (
       <div className="App">
         <MuiThemeProvider>
-          <Tabs value={this.state.focusTab} onChange={this.tabChangedHandler} > 
+          <Tabs value={this.state.focusTab} onChange={this.tabChangedHandler} style={{overflowX: 'hidden',  maxWidth:'100%'}}> 
             <Tab label="Play" value={0}>
               <div className="player-page" style={{height:600, marginLeft:'auto', marginRight:'auto'}}>
                 <Player
