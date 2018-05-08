@@ -1,4 +1,5 @@
-Simplistic web frontend implementation for AuDiube made with react-create-app.
+Simplistic web frontend implementation for AuDiube.
+Buidl with react-create-app.
 
 
 ## TODO
