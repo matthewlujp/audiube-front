@@ -5,8 +5,8 @@ Buidl with react-create-app.
 ## TODO
 - [ ] Fix iOS not playing HLS embeded on <video>
 - [ ] Introduce Redux
-- [ ] Hold view history
-- [ ] Prevent loop
+- [x] Hold view history
+- [x] Prevent loop
 - [ ] Add user management to keep favorite
 - [ ] Back button
 
